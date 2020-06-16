@@ -24,10 +24,12 @@ public :
    // Declaration of leaf types
    Float_t         abseta;
    Float_t         combRelIsoPF04;
+   Float_t         combRelIsoPF03;
    Float_t         eta;
    Float_t         pt;
    Int_t           CutBasedIdLoose;
    Int_t           CutBasedIdMedium;
+   Int_t           CutBasedIdMediumPrompt;
    Int_t           CutBasedIdTight;
    Int_t           DoubleIsoMu17Mu8dZ_Mass3p8;
    Int_t           DoubleIsoMu17Mu8dZ_Mass8;
@@ -50,6 +52,7 @@ public :
    Float_t         mass;
    Float_t         tag_abseta;
    Float_t         tag_combRelIsoPF04;
+   Float_t         tag_combRelIsoPF03;
    Float_t         tag_eta;
    Float_t         tag_pt;
    Int_t           tag_DoubleIsoMu17Mu8dZ_Mass3p8;
@@ -65,15 +68,17 @@ public :
    Int_t           pair_BestZ;
    Int_t           mcTrue;
    Int_t           pair_BestZOnePair;
-   Float_t           tag_nVertices;
+   Float_t         tag_nVertices;
    Float_t         weight;
    // List of branches
    TBranch        *b_abseta;   //!
    TBranch        *b_combRelIsoPF04;   //!
+   TBranch        *b_combRelIsoPF03;   //!
    TBranch        *b_eta;   //!
    TBranch        *b_pt;   //!
    TBranch        *b_CutBasedIdLoose;   //!
    TBranch        *b_CutBasedIdMedium;   //!
+   TBranch        *b_CutBasedIdMediumPrompt;   //!
    TBranch        *b_CutBasedIdTight;   //!
    TBranch        *b_DoubleIsoMu17Mu8dZ_Mass3p8;   //!
    TBranch        *b_DoubleIsoMu17Mu8dZ_Mass8;   //!
@@ -88,6 +93,7 @@ public :
    TBranch        *b_mass;   //!
    TBranch        *b_tag_abseta;   //!
    TBranch        *b_tag_combRelIsoPF04;   //!
+   TBranch        *b_tag_combRelIsoPF03;   //!
    TBranch        *b_tag_eta;   //!
    TBranch        *b_tag_pt;   //!
    TBranch        *b_tag_DoubleIsoMu17Mu8dZ_Mass3p8;   //!
@@ -188,10 +194,12 @@ void fitter_tree::Init(TTree *tree)
 
    fChain->SetBranchAddress("abseta", &abseta, &b_abseta);
    fChain->SetBranchAddress("combRelIsoPF04", &combRelIsoPF04, &b_combRelIsoPF04);
+   fChain->SetBranchAddress("combRelIsoPF03", &combRelIsoPF03, &b_combRelIsoPF03);
    fChain->SetBranchAddress("eta", &eta, &b_eta);
    fChain->SetBranchAddress("pt", &pt, &b_pt);
    fChain->SetBranchAddress("CutBasedIdLoose", &CutBasedIdLoose, &b_CutBasedIdLoose);
    fChain->SetBranchAddress("CutBasedIdMedium", &CutBasedIdMedium, &b_CutBasedIdMedium);
+   fChain->SetBranchAddress("CutBasedIdMediumPrompt", &CutBasedIdMediumPrompt, &b_CutBasedIdMediumPrompt);
    fChain->SetBranchAddress("CutBasedIdTight", &CutBasedIdTight, &b_CutBasedIdTight);
    fChain->SetBranchAddress("DoubleIsoMu17Mu8dZ_Mass3p8", &DoubleIsoMu17Mu8dZ_Mass3p8, &b_DoubleIsoMu17Mu8dZ_Mass3p8);
    fChain->SetBranchAddress("DoubleIsoMu17Mu8dZ_Mass8", &DoubleIsoMu17Mu8dZ_Mass8, &b_DoubleIsoMu17Mu8dZ_Mass8);
@@ -206,6 +214,7 @@ void fitter_tree::Init(TTree *tree)
    fChain->SetBranchAddress("mass", &mass, &b_mass);
    fChain->SetBranchAddress("tag_abseta", &tag_abseta, &b_tag_abseta);
    fChain->SetBranchAddress("tag_combRelIsoPF04", &tag_combRelIsoPF04, &b_tag_combRelIsoPF04);
+   fChain->SetBranchAddress("tag_combRelIsoPF03", &tag_combRelIsoPF03, &b_tag_combRelIsoPF03);
    fChain->SetBranchAddress("tag_eta", &tag_eta, &b_tag_eta);
    fChain->SetBranchAddress("tag_pt", &tag_pt, &b_tag_pt);
    fChain->SetBranchAddress("tag_DoubleIsoMu17Mu8dZ_Mass3p8", &tag_DoubleIsoMu17Mu8dZ_Mass3p8, &b_tag_DoubleIsoMu17Mu8dZ_Mass3p8);
