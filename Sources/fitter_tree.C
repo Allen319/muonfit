@@ -75,7 +75,6 @@ void fitter_tree::Loop(TString fileName, TString ref)
       // if (Cut(ientry) < 0) continue;
       float wt = 1.0;
       if ((fileName.Contains("DY") || fileName.Contains("closure"))&& !fileName.Contains("PU")) wt = wt *weight;
-      std::cout<<wt<<std::endl;
       bool passBaseline = combRelIsoPF04<0.15&&mass>60&&mass<120&&CutBasedIdTight==1&&pt>10&&tag_pt>10;
       bool pass_tag = tag_pt > 25 && tag_abseta < 2.4 && tag_IsoMu24;
       bool pass_probe = CutBasedIdMediumPrompt;
@@ -100,7 +99,7 @@ void fitter_tree::Loop(TString fileName, TString ref)
    ptAll->Add(ptPass,ptFail);
    etaAll->Add(etaPass,etaFail);
    nvtxAll->Add(nvtxPass,nvtxFail);
-   all2d->Add(ref2Dpass,ref2Dfail);
+   all2d->Add(pass2d,fail2d);
         
    f1->Write();
    f1->Close();
