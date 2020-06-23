@@ -407,11 +407,11 @@ void fitMuons(TString type){
    }
     int nbNvtxBins = sizeof(nvtxBins)/sizeof(Int_t)-1 ;
     
-    TH2F *efficiencies_eta = new TH2F(type+"_soup_eta",type+"_soup_eta",nbEtaBins, etaBins, nbEtaBins, etaBins);
-    TH1F *efficiencies_nvtx = new TH1F(type+"_nvtx",type+"_nvtx",nbNvtxBins,nvtxBins);
-    TH2F *efficiencies_pt_eta = new TH2F(type+"_ref_pt_eta",type+"_ref_pt_eta",nbPtBins,ptBins, nbEtaBins, etaBins);
-    TH1F *efficiencies_subleading = new TH1F(type+"_subleadingpt",type+"_subleadingpt",nbPtBins,ptBins);
-    TH1F *efficiencies_total = new TH1F(type+"efficiencies_total",type+"efficiencies_total",2,0,2);
+    //TH2F *efficiencies_eta = new TH2F(type+"_soup_eta",type+"_soup_eta",nbEtaBins, etaBins, nbEtaBins, etaBins);
+    //TH1F *efficiencies_nvtx = new TH1F(type+"_nvtx",type+"_nvtx",nbNvtxBins,nvtxBins);
+    //TH2F *efficiencies_pt_eta = new TH2F(type+"_ref_pt_eta",type+"_ref_pt_eta",nbPtBins,ptBins, nbEtaBins, etaBins);
+    //TH1F *efficiencies_subleading = new TH1F(type+"_subleadingpt",type+"_subleadingpt",nbPtBins,ptBins);
+    //TH1F *efficiencies_total = new TH1F(type+"efficiencies_total",type+"efficiencies_total",2,0,2);
     TH2F *ref_pt_eta = new TH2F(type+"ref_pt_eta",type+"ref_pt_eta",nbPtBins, ptBins, nbEtaBins, etaBins);
     TH1F *ref_pt = new TH1F(type+"_ref_pt",type+"_ref_pt",nbPtBins,ptBins);
 
@@ -434,18 +434,6 @@ void fitMuons(TString type){
 
     float effVal, effErr;
 
-    for (int i = 0 ; i < nbEtaBins ; i++){
-        for (int j = 0 ; j < nbEtaBins ; j++){   
-			do2DFit(type,"eta",i,i+1,j,j+1,voigtPlusExpo, &effVal, &effErr);
-            cout << "val=" << effVal << " error=" << effErr << endl;
-            cout<<"test\n\n\n\n\n\n\n"<<endl;
-            efficiencies_eta->SetBinContent(i+1,j+1,effVal);
-            efficiencies_eta->SetBinError(i+1,j+1,effErr);
-            //count2D(type,"eta",i,i+1,j,j+1,&effVal, &effErr);
-            cout << "val=" << effVal << " error=" << effErr << endl;
-
-        }
-    }
 
     for (int i = 0 ; i < nbPtBins ; i++){
         for (int j = 0 ; j < nbEtaBins ; j++){   
@@ -458,26 +446,6 @@ void fitMuons(TString type){
             cout << "val=" << effVal << " error=" << effErr << endl;
 
         }
-    }
-
-    for (int i = 0 ; i < nbNvtxBins ; i++){
-            do1DFit(type,"nvtx",i,i+1,voigtPlusExpo, &effVal, &effErr);
-            cout << "val=" << effVal << " error=" << effErr << endl;
-            cout<<"test\n\n\n\n\n\n\n"<<endl;
-            efficiencies_nvtx->SetBinContent(i+1,effVal);
-            efficiencies_nvtx->SetBinError(i+1,effErr);
-            //count1D(type,"pt",0,-1,i,i+1,&effVal, &effErr);
-            cout << "val=" << effVal << " error=" << effErr << endl;
-    }
-
-    for (int i = 0 ; i < nbPtBins ; i++){
-            do2DFit(type,"pt",0,-1,i,i+1,voigtPlusExpo, &effVal, &effErr);
-            cout << "val=" << effVal << " error=" << effErr << endl;
-            cout<<"test\n\n\n\n\n\n\n"<<endl;
-            efficiencies_subleading->SetBinContent(i+1,effVal);
-            efficiencies_subleading->SetBinError(i+1,effErr);
-            count2D(type,"pt",0,-1,i,i+1,&effVal, &effErr);
-            cout << "val=" << effVal << " error=" << effErr << endl;
     }
 
     for (int i = 0 ; i < nbPtBins ; i++){
@@ -517,11 +485,7 @@ void fitMuons(TString type){
     efficiencies_total->SetBinError(2,effErr);
 
     TFile *myOutFile = new TFile("eff.root","update");
-    efficiencies_eta->Write();
     efficiencies_pt_eta->Write();
-    efficiencies_subleading->Write();
-    efficiencies_nvtx->Write();
-    efficiencies_total->Write();
     ref_eta->Write();
     ref_nvtx->Write();
     ref_pt->Write();
